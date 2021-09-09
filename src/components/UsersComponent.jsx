@@ -10,15 +10,26 @@ export default function Users() {
   useEffect(() => {
     dispatch(getUsers.getUsers());
   }, [dispatch]);
-  return (
-    <div>
-      {loading && <p>Loading...</p>}
-      {users.length === 0 && !loading && <p>No users found</p>}
-      {errors && !loading && <p>{errors}</p>}
-      {users.length > 0 &&
-        users.map((user) => (
-          <Card key={user.id} user={user} /> //key is used to identify each card
-        ))}
+  return loading ? (
+    <h5>Loading...</h5>
+  ) : errors ? (
+    <h5>{errors}</h5>
+  ) : (
+    <div className="row">
+      <h5>Users</h5>
+      {users.map((user) => (
+        <Card key={user.id} user={user} />
+      ))}
     </div>
   );
+
+  // <div>
+  //   {loading && <p>Loading...</p>}
+  //   {users.length === 0 && !loading && <p>No users found</p>}
+  //   {errors && !loading && <p>{errors}</p>}
+  //   {users.length > 0 &&
+  //     users.map((user) => (
+  //       <Card key={user.id} user={user} /> //key is used to identify each card
+  //     ))}
+  // </div>
 }
